@@ -11,9 +11,17 @@ export const ADD_BOOK_SUCESS = 'ADD_BOOK_SUCESS';
 
 export const ADD_BOOK_FAIL = 'ADD_BOOK_FAIL'; 
 
+export const ADD_DVD_SUCESS = "ADD_DVD_SUCESS";
+
+export const ADD_DVD_FAIL = "ADD_DVD_FAIL"; 
+
 export const GET_BOOK_SUCESS = 'GET_BOOK_SUCESS';
 
 export const GET_BOOK_FAIL = 'GET_BOOK_FAIL'; 
+
+export const GET_DVD_SUCESS = "GET_DVD_SUCESS";
+
+export const GET_DVD_ERROR = "GET_DVD_ERROR";
 
 export const GET_ALL_ITEMS_SUCCESS = 'GET_ALL_ITEMS_SUCCESS';
 

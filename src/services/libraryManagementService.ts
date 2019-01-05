@@ -63,6 +63,16 @@ class LibraryManagementService {
     });
   }
 
+  public getDvd(isbn: string): Promise<DVD> {
+    return new Promise((resolve, reject) => {
+      this.httpRequestHandler.getItem(`/getDvd?isbn=${isbn}`).then(res => {
+        resolve(dvdMapper(res.data));
+      }).catch(err => {
+        reject(err);
+      });
+    });
+  }
+
   public deleteItem(itemType: string, ISBN: string): any {
     return new Promise((resolve,reject) => {
       this.httpRequestHandler.deleteItem(`/deleteBook?isbn=${ISBN}`).then(res => {
@@ -97,9 +107,7 @@ class LibraryManagementService {
 
   public generateReport() {}
 
-  private addDVD(dvd: DVD) {}
 
-  private addBook(book: Book) {}
 
   private calculateFine(penaltyDays: number) {}
 }

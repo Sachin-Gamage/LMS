@@ -1,9 +1,42 @@
 import * as React from 'react';
 import { DVD } from '../../../modals/dvd';
+import { openPopup } from '../../../actions/popUpActions';
+import { connect } from "react-redux";
+import { addDvd } from '../../../actions/dvdActions';
 
 
+interface IAdddvdStates {
+    ISBN?: string;
+    title?: string;
+    sector?: string;
+    burrowDateAndTime?: string;
+    reader?: string;
+    type?: string;
+    pubDate?: string;
+    producer?: string;
+    languagesAvailable?: string[];
+    subsAvailablae?: string[];
+    actors?: string[];  
+}
 
-class AddDvd extends React.Component<any,DVD>{
+class AddDvd extends React.Component<any, IAdddvdStates>{
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            ISBN: '',
+            title: '',
+            sector: '',
+            burrowDateAndTime: '',
+            reader: '',
+            type: '',
+            pubDate: '',
+            producer: '',
+            languagesAvailable: [],
+            subsAvailablae: [],
+            actors: [], 
+        }
+    }
 
     openPopups() {
         if (this.props.success) {
@@ -16,19 +49,32 @@ class AddDvd extends React.Component<any,DVD>{
     }
 
     private handleOnSubmit() {
-        let book: Book = new Book();
+        let dvd:DVD = new DVD();
 
-        book.$ISBN = this.state.ISBN;
-        book.$title = this.state.title;
-        book.$sector = this.state.title;
-        book.$authors = this.state.authors.split(',');
-        book.$publisher = this.state.publisher;
-        book.$pubDate = this.state.pubDate;
-        book.$noOfPages = parseInt(this.state.pages);
-        this.props.dispatch(addBook(book));
+        dvd.$ISBN = this.state.ISBN;
+        dvd.$title = this.state.title;
+        dvd.$sector = this.state.sector;
+        dvd.$burrowDateAndTime = this.state.burrowDateAndTime;
+        dvd.$type = this.state.type;
+        dvd.$pubDate = this.state.pubDate;
+        dvd.$producer = this.state.producer;
+        dvd.$languagesAvailable = this.state.languagesAvailable;
+        dvd.$subsAvailablae = this.state.subsAvailablae;
+        dvd.$actors = this.state.actors;
+        
+        this.props.dispatch(addDvd(dvd));
 
     }
+
+    private addArrays = (element) =>{
+        const array = [];
+        array.push(element);
+
+        return array;
+    }
+
     render(){
+        this.openPopups();
         return(
             <div>
                 <div className="row">
@@ -36,7 +82,7 @@ class AddDvd extends React.Component<any,DVD>{
                         <label >ISBN</label>
                     </div>
                     <div className="col-75">
-                        <input type="text" id="fname" name="firstname" placeholder="ISBN"/>
+                        <input type="text"  placeholder="ISBN" onChange={(e) => { this.setState({ ISBN: e.target.value }) }}/>
                     </div>
                 </div>
                 <div className="row">
@@ -44,7 +90,7 @@ class AddDvd extends React.Component<any,DVD>{
                         <label>Title of the Book</label>
                     </div>
                     <div className="col-75">
-                        <input type="text" id="lname" name="lastname" placeholder="Title"/>
+                        <input type="text"   placeholder="Title" onChange={(e) => { this.setState({ title: e.target.value }) }}/>
                     </div>
                 </div>
                 <div className="row">
@@ -52,7 +98,7 @@ class AddDvd extends React.Component<any,DVD>{
                         <label>Sector</label>
                     </div>
                     <div className="col-75">
-                        <input type="text" id="lname" name="lastname" placeholder="Sector"/>
+                        <input type="text"   placeholder="Sector" onChange={(e) => { this.setState({ sector: e.target.value }) }}/>
                     </div>
                 </div>
                 <div className="row">
@@ -60,7 +106,7 @@ class AddDvd extends React.Component<any,DVD>{
                         <label>Available Languages</label>
                     </div>
                     <div className="col-75">
-                        <input type="text" id="lname" name="lastname" placeholder="Available Languages"/>
+                        <input type="text"   placeholder="Available Languages" onChange={(e) => { this.setState({ languagesAvailable: this.addArrays(e.target.value) }) }}/>
                     </div>
                 </div>
                 <div className="row">
@@ -68,7 +114,7 @@ class AddDvd extends React.Component<any,DVD>{
                         <label>Available SubTitles</label>
                     </div>
                     <div className="col-75">
-                        <input type="text" id="lname" name="lastname" placeholder="Available SubTitles"/>
+                        <input type="text"   placeholder="Available SubTitles" onChange={(e) => { this.setState({ subsAvailablae: this.addArrays(e.target.value) }) }}/>
                     </div>
                 </div>
                 <div className="row">
@@ -76,7 +122,7 @@ class AddDvd extends React.Component<any,DVD>{
                         <label>Producer</label>
                     </div>
                     <div className="col-75">
-                        <input type="text" id="lname" name="lastname" placeholder="Producer"/>
+                        <input type="text"   placeholder="Producer" onChange={(e) => { this.setState({ producer: e.target.value }) }}/>
                     </div>
                 </div>
                 <div className="row">
@@ -84,15 +130,20 @@ class AddDvd extends React.Component<any,DVD>{
                         <label>Actors</label>
                     </div>
                     <div className="col-75">
-                        <input type="text" id="lname" name="lastname" placeholder="Actors"/>
+                        <input type="text"   placeholder="Actors" onChange={(e) => { this.setState({ actors: this.addArrays(e.target.value) }) }}/>
                     </div>
                 </div>
                 <div className="row">
-                    <input type="submit" value="Add Item"/>
+                    <input type="submit" value="Add Item" onClick={() => {this.handleOnSubmit()}}/>
                 </div>
             </div>
         );
     }
 }
 
-export default AddDvd;
+const mapStateToProps = state => ({
+    success: state.book.success,
+    err: state.book.err
+});
+
+export default connect(mapStateToProps)(AddDvd);
