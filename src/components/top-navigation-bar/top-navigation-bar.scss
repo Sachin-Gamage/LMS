@@ -1,0 +1,43 @@
+@import '../../styles/variables.scss';
+
+.skin-blue{
+  .main-header{
+    .navbar{
+      background: $secondary-color;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      .nav>li>a{
+        color: $accent-color;
+        padding-top: 25px;
+        padding-bottom: 25px;
+        &:hover{
+          background-color: $accent-color;
+          color: $secondary-color;
+        }
+      }
+      .sidebar-toggle{
+        background-color: lighten($accent-color, 40%);
+        padding: 25px 18px;
+        &:hover{
+          background-color: $accent-color;
+        }
+        &:before{
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.main-header .navbar{
+  min-height: $navigation-panel-size;
+}
+
+.sidebar-mini{
+  &.sidebar-collapse{
+    .main-header{
+      .navbar{
+        margin-left: $navigation-panel-size;
+      }
+    }
+  }
+}

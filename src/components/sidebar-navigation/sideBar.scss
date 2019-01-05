@@ -1,0 +1,75 @@
+@import '../../styles/variables.scss';
+
+.skin-blue{
+    .main-sidebar{
+        background-color: $primary-color;
+        box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08);
+        .sidebar-menu>li{
+            &.active>a{
+                border-left-color:rgb(91, 158, 113);
+            }
+            .treeview-menu{
+                margin-left: 3px;
+                li>a{
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+    .main-header{
+        .logo{
+            background-color: $primary-color;
+            height: $navigation-panel-size;
+            padding-top: 8px;
+            color: $accent-color;
+            font-size: 39px;
+            &:hover{
+                background-color: $accent-color;
+                color: $secondary-color;
+            }
+        }
+    }
+    .sidebar{
+        a{
+            color: $accent-color;
+            svg{
+                width: 30px;
+            }
+        }
+    }
+} 
+.sidebar-mini{
+    &.sidebar-collapse{
+        .main-sidebar{
+            width: $navigation-panel-size !important;
+        }
+        .main-header{
+            .logo{
+                width: $navigation-panel-size;
+            }
+        }
+        .sidebar-menu{
+            li > a{
+                padding-left: 16px;
+                font-size: 18px;
+                span{
+                    font-size: 14px;
+                    padding-top: 14px !important;
+                    padding-bottom: 15px !important;
+                }
+            }
+            li{
+                &:hover > a{
+                    background-color: #444
+                }
+                &.active > a{
+                    border-left-color:rgb(91, 158, 113);
+                }
+            }
+        }
+    }
+} 
+
+.sidebar-mini:not(.sidebar-mini-expand-feature).sidebar-collapse .sidebar-menu > li:hover > a > span:not(.pull-right), .sidebar-mini:not(.sidebar-mini-expand-feature).sidebar-collapse .sidebar-menu > li:hover > .treeview-menu{
+    left: $navigation-panel-size;
+}

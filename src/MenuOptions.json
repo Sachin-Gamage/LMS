@@ -1,0 +1,33 @@
+{
+    "id": "leftNavBar",
+    "items": [
+        {
+            "id": "dashboard",
+            "name": "Dashboard",
+            "icon": "fas fa-book-reader",
+            "url": "/#",
+            "children": []
+        },
+        {
+            "id": "dashboard",
+            "name": "Add Item",
+            "icon": "fas fa-plus",
+            "url": "/add-item",
+            "children": []
+        },
+        {
+            "id": "dashboard",
+            "name": "List Items",
+            "icon": "fa fa-list-ul",
+            "url": "/list-items",
+            "children": []
+        },
+        {
+            "id": "dashboard",
+            "name": "Reports",
+            "icon": "fa fa-chart-line",
+            "url": "/reports",
+            "children": []
+        }
+    ]
+}
