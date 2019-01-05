@@ -36,3 +36,21 @@ export function getBook(isbn:string){
             });
     };
 }
+
+export function deleteBook(isbn: string) {
+    debugger
+    return dispatch => {
+        return libraryManagementService.deleteItem('book', isbn)
+            .then(book => {
+                dispatch({
+                    type: types.DELETE_BOOK_SUCESS,
+                    book
+                });
+            }).catch(err => {
+                dispatch({
+                    type: types.DELETE_BOOK_FAIL,
+                    err
+                });
+            });
+    };
+}

@@ -1,4 +1,5 @@
 import { Book } from '../modals/book';
+import { LibraryItemDisplay } from '../modals/libraryItemDisplay';
 
 export function booksMapper(apiMpodel){
     const bookList:Book[] = new Array<Book>();
@@ -9,7 +10,7 @@ export function booksMapper(apiMpodel){
         book.$title = apiBook.title;
         book.$noOfPages = apiBook.totalPages;
         book.$pubDate = apiBook.publicationDate;
-        book.$reader = apiBook.reader;
+        book.$reader = apiBook.currentReader;
         book.$type = 'book';
         book.$publisher = apiBook.publisher;
         bookList.push(book);
@@ -25,9 +26,25 @@ export function bookMapper(apiBook):Book{
     book.$title = apiBook.title;
     book.$noOfPages = apiBook.totalPages;
     book.$pubDate = apiBook.publicationDate;
-    book.$reader = apiBook.reader;
+    book.$reader = apiBook.currentReader;
     book.$type = 'book';
     book.$publisher = apiBook.publisher;
     return book;
+
+}
+
+export function bookListMapper(apiBooks):LibraryItemDisplay[]{
+    const libraryItemDisplayList = new Array<LibraryItemDisplay>();
+
+    apiBooks.forEach((book) => {
+        const libraryItemDisplay = new LibraryItemDisplay();
+        libraryItemDisplay.$ISBN = book.isbn;
+        libraryItemDisplay.$itemtype = 'Book';
+        libraryItemDisplay.$title = book.title;
+        libraryItemDisplay.$reader = book.currentReader;
+        libraryItemDisplayList.push(libraryItemDisplay);
+    });
+
+    return libraryItemDisplayList;
 
 }

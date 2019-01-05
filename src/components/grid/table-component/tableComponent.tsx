@@ -3,7 +3,7 @@ import {LibraryItem} from '../../../modals/libraryItem';
 interface ITableProps {
   tableRows: string[];
   tableData: any[];
-  onRetailerDetailView: (isbn: string,type: string) => void;
+  onItemSelect: (isbn: string,type: string) => void;
 }
 class TableComponent extends React.Component<ITableProps, {}> {
   private getTableHeading() {
@@ -19,7 +19,7 @@ class TableComponent extends React.Component<ITableProps, {}> {
           role="row"
           className="odd"
           onClick={() => {
-            this.props.onRetailerDetailView(item.isbn,item.type);
+            this.props.onItemSelect(item.isbn,item.type);
           }}
         >
           <td>{item.isbn}</td>

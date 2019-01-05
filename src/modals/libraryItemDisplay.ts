@@ -2,6 +2,7 @@ export class LibraryItemDisplay{
     private ISBN: string;
     private title:string;
     private itemtype:string;
+    private reader:number;
 
 
     /**
@@ -50,6 +51,14 @@ export class LibraryItemDisplay{
      */
 	public set $itemtype(value: string) {
 		this.itemtype = value;
-	}
+    }
+    
+    public get $reader():number{
+        return this.reader;
+    }
+
+    public set $reader(reader:number){
+        this.reader = reader;
+    }
 
 }

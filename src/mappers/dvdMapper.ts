@@ -1,5 +1,6 @@
 
 import { DVD } from '../modals/dvd';
+import { LibraryItemDisplay } from '../modals/libraryItemDisplay';
 
 export function dvdsMapper(apiMpodel){
     const dvdList:DVD[] = new Array<DVD>();
@@ -8,7 +9,7 @@ export function dvdsMapper(apiMpodel){
         dvd.$ISBN = apiDVD.isbn;
         dvd.$title = apiDVD.title;
         dvd.$pubDate = apiDVD.publicationDate;
-        dvd.$reader = apiDVD.reader;
+        dvd.$reader = apiDVD.currentReader;
         dvd.$type = 'dvd';
         dvd.$producer = apiDVD.producer;
         dvdList.push(dvd);
@@ -21,8 +22,24 @@ export function dvdMapper(apiDvd){
       dvd.$ISBN = apiDvd.isbn;
       dvd.$title = apiDvd.title;
       dvd.$pubDate = apiDvd.publicationDate;
-      dvd.$reader = apiDvd.reader;
+      dvd.$reader = apiDvd.currentReader;
       dvd.$type = "dvd";
       dvd.$producer = apiDvd.producer;
       return dvd;
+}
+
+export function dvdListMapper(apiDvds):LibraryItemDisplay[]{
+    const libraryItemDisplayList = new Array<LibraryItemDisplay>();
+
+    apiDvds.forEach((dvd) => {
+        const libraryItemDisplay = new LibraryItemDisplay();
+        libraryItemDisplay.$ISBN = dvd.isbn;
+        libraryItemDisplay.$itemtype = 'DVD';
+        libraryItemDisplay.$title = dvd.title;
+        libraryItemDisplay.$reader = dvd.currentReader;
+        libraryItemDisplayList.push(libraryItemDisplay);
+    });
+
+    return libraryItemDisplayList;
+
 }

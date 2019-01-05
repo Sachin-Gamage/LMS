@@ -3,6 +3,7 @@ import { Book } from '../modals/book';
 import libraryManagementService from '../services/libraryManagementService';
 
 export function getAllItems() {
+    debugger
     return dispatch => {
         return libraryManagementService.getAllItems()
             .then(libraryItems => {

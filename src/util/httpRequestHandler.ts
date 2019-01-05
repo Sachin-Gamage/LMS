@@ -30,63 +30,23 @@ export class HttpRequestHandler {
     }
 
     public putItem(url: string, data: any): Promise<any> {
-        let body: string = JSON.stringify(data);
-        let responseBody = '';
-        let responseData: any = {};
-        let options = {
-            host: this.baseUrl,
-            path: url,
-            method: 'PUT',
-            headers: {}
-        }
         return new Promise((resolve, reject) => {
-            let request = http.request(options, (res) => {
-
-                res.on('data', (data) => {
-                    responseBody += data
-                });
-                res.on('error', (err) => {
-                    reject(err);
-                });
-                res.on('end', () => {
-                    responseData = JSON.parse(responseBody);
-                    resolve(responseData);
-                })
-            }).on('error', (err) => {
-                reject(err)
+            Axios.put(`${this.baseUrl}${url}`, data).then(res => {
+                resolve(res);
+            }).catch(err => {
+                reject(err);
             });
-
-            request.write(body);
-            request.end();
         });
     }
 
     public deleteItem(url: string): Promise<any> {
-
-        let options = {
-            host: this.baseUrl,
-            path: url,
-            rejectUnauthorized: false,
-            method: 'DELETE',
-            headers: {}
-        }
+        debugger
         return new Promise((resolve, reject) => {
-            let responseBody = '';
-            let responseData: any = {};
-            http.request(options, (res) => {
-                res.on('data', (data) => {
-                    responseBody += data;
-                });
-                res.on('error', (err) => {
-                    reject(err);
-                });
-                res.on('end', () => {
-                    responseData = JSON.parse(responseBody);
-                    resolve(responseData);
-                })
-            }).on('error', (error) => {
-                reject(error);
-            })
+            Axios.delete(`${this.baseUrl}${url}`).then(res => {
+                resolve(res);
+            }).catch(err => {
+                reject(err);
+            });
         });
     }
 }

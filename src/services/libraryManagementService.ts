@@ -6,8 +6,8 @@ import { LibraryItemDisplay } from "../modals/libraryItemDisplay";
 import { Reader } from "../modals/reader";
 import { Report } from "../modals/report";
 import { HttpRequestHandler } from "../util/httpRequestHandler";
-import { booksMapper, bookMapper } from "../mappers/bookMapper";
-import { dvdMapper } from "../mappers/dvdMapper";
+import { booksMapper, bookMapper, bookListMapper } from "../mappers/bookMapper";
+import { dvdMapper, dvdsMapper, dvdListMapper } from "../mappers/dvdMapper";
 import { mapLibraryItems } from "../mappers/libraryItemMapper";
 
 class LibraryManagementService {
@@ -44,8 +44,10 @@ class LibraryManagementService {
   }
 
   public getAllItems(): Promise<any> {
+
     return new Promise((resolve, reject) => {
-      this.httpRequestHandler.getItem('/getAllItems').then(items => {
+      debugger
+      this.httpRequestHandler.getItem('/getLibraryItems').then(items => {
         resolve(items.data);
       }).catch(err => {
         reject(err);
@@ -74,9 +76,16 @@ class LibraryManagementService {
   }
 
   public deleteItem(itemType: string, ISBN: string): any {
+    debugger
+    let url = "";
+    if (itemType.toLowerCase() === "book") {
+      url = "/deleteBook";
+    } else {
+      url = "/deleteDvd";
+    }
     return new Promise((resolve,reject) => {
-      this.httpRequestHandler.deleteItem(`/deleteBook?isbn=${ISBN}`).then(res => {
-        resolve(bookMapper(res.data));
+      this.httpRequestHandler.deleteItem(`${url}?isbn=${ISBN}`).then(res => {
+        resolve(res);
       }).catch(err => {
         reject(err);
       });

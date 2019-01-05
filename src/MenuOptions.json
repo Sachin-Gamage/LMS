@@ -28,6 +28,13 @@
             "icon": "fa fa-chart-line",
             "url": "/reports",
             "children": []
+        },
+        {
+            "id": "dashboard",
+            "name": "Delete Items",
+            "icon": "fa fa-trash",
+            "url": "/delete-item",
+            "children": []
         }
     ]
 }

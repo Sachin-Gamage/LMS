@@ -23,14 +23,6 @@ class Container extends React.Component<any,any>{
                 <SideBar menu={this.menu} userName={""} />
                 <div className="content-wrapper">
                     <div className="content-header">
-                        {/* <Route exact path='/' render={() => (<DashboardHome />)} />
-                        <Switch>
-                            {
-                                DashBoardRoutes.map((route, key) => {
-                                    return (<Route exact path={route.path} key={key} render={() => (<route.component/>)} />);
-                                })
-                            }
-                        </Switch> */}
                         <RouteContainer/>
                     </div>
                 </div>

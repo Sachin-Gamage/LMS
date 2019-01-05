@@ -28,7 +28,7 @@ class GridContainer extends React.Component<IGridContainerProps,{}> {
                         <TableComponent 
                             tableRows={this.props.tableRows}
                             tableData = {this.props.tableData}
-                            onRetailerDetailView={this.props.onItemClick}
+                            onItemSelect={this.props.onItemClick}
                         />
                     </div>
                     {/* <div className='row'>

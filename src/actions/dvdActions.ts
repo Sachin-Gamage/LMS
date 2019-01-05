@@ -32,3 +32,20 @@ export function getDVD(isbn: string) {
             });
     };
 }
+
+export function deleteDvd(isbn: string) {
+    return dispatch => {
+        return libraryManagementService.deleteItem('dvd', isbn)
+            .then(dvd => {
+                dispatch({
+                    type: types.DELETE_DVD_SUCESS,
+                    dvd
+                });
+            }).catch(err => {
+                dispatch({
+                    type: types.DELETE_DVD_ERROR,
+                    err
+                });
+            });
+    };
+}
